@@ -1,3 +1,6 @@
+# KAMALESH S
+# 212223060108
+# Date : 20-09-2025
 # OBSTACLE-DETECTION-SYSTEM-USING-ULTRASONIC-SENSOR
 
 ## Aim:
@@ -50,13 +53,76 @@ Step 6: Test and Validate
 Step 7: Save Your Work
 14.	Stop Simulation: Click the “Stop Simulation” button to end the test.
 15.	Save Circuit: Click “Save” to store your design and code for future use or presentation.
+## Schematic Veiw
+<img width="981" height="764" alt="image" src="https://github.com/user-attachments/assets/119515a9-a981-4e8b-975c-5af356201b2b" />
+
+## Circuit Diagram
+<img width="1919" height="974" alt="image" src="https://github.com/user-attachments/assets/cf793918-d542-433a-8353-33b7a89c2813" />
 
 
 ## Code:
+```c++
+// C++ code
+//
 
+// variables
+int led = 2;
+int buzzer = 8;
+int pingPin = 13;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(led, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+}
+
+void loop()
+{
+  long duration, cm; // variables to store the duration and distance
+  
+  // ultrasensor state
+  pinMode(pingPin, OUTPUT);
+  digitalWrite(pingPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin, LOW);
+	
+  // check input from ultrasensor pingPIN
+  // store the input in duration variable
+  pinMode(pingPin, INPUT);
+  duration = pulseIn(pingPin, HIGH);
+
+  // convert the time into cm
+  cm = duration / 29 / 2;
+
+  // print the result
+  Serial.print(cm);
+  Serial.print("cm");
+  Serial.println();
+  
+  // check if distance drops to 60 cm
+  // buzz the piezzo every 1 sec
+  // blink the light every 1 sec
+  if(cm < 200){
+    digitalWrite(led, HIGH);
+    tone(buzzer, 1000); 
+    delay(1000); // every 1 sec
+    digitalWrite(led, LOW);
+  	noTone(buzzer);        // ... no sound 
+    delay(1000);  
+  }
+
+}
+```
 
 ## Output:
  
+
+https://github.com/user-attachments/assets/b9e901d7-c1c5-407a-92b7-2aa9f69ef8f4
+
+
 
 
 ## Result
